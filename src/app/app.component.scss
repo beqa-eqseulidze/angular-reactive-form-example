@@ -1,0 +1,16 @@
+input.ng-invalid.ng-touched{      //თუ ინფუთი ვალიდური არ არის და არის თაჩთი მას აქვს ეს კლასები 
+    border:1px solid red;
+    color:red;
+}
+
+input.ng-valid.ng-touched{    //თუ ინფუთი ვალიდურია და არის თაჩთი მას აქვს ეს კლასები 
+    border:1px solid green;
+}
+
+input:not(:first-child){
+    margin-left:10px;
+}
+
+label{
+    margin-left:10px;
+}
