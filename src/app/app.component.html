@@ -14,7 +14,7 @@
     <!--განათლების შესახებ ინფორმაციის განყოფილება -->
     <fieldset class="education-info" formArrayName="education">
       <legend>Education</legend>
-      <ng-container *ngFor="let edu of educations.controls; let i=index">
+      <ng-container *ngFor="let edu of educations.controls; index as i">
         <div [formGroupName]='i'>
           <input type="text" placeholder="university or college" formControlName="universityName">
           <input type="text" placeholder="qualification" formControlName="qualification">
@@ -67,7 +67,8 @@
 
 
 </fieldset>
-
+<button (click)="edit()">edit cv</button>
+<br>
 {{form.valid}}
 <pre>
  {{form.value|json}}

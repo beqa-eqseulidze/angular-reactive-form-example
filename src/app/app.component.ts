@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupName, FormArray, FormBuilder } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,7 +15,7 @@ export class AppComponent {
     public fb: FormBuilder
   ) { }
 
-  public form: FormGroup = this.fb.group({
+  public form:FormGroup= this.fb.group({
 
     // ფორმ კონტროლი სახელისთვის
     firstName: new FormControl("", [
@@ -106,11 +104,29 @@ export class AppComponent {
   submit() {
     if (this.form.valid) {
       console.log(this.form.value);
-
+      localStorage.setItem('formValue',JSON.stringify(this.form.value))
       this.form.reset();
       this.clearEducation();
       this.clearExperience();
     }
   };
 
+  edit():void{
+    const formValueS:string|null=localStorage.getItem('formValue');
+    if(formValueS){
+      let formValueObj=JSON.parse(formValueS);
+      this.form.patchValue(formValueObj);
+      let education=formValueObj.education;
+      let experience=formValueObj.experience;
+      education.forEach((edu:any,index:number)=> {
+          this.addEducation();
+          (this.form.controls['education'] as FormArray).at(index).patchValue(edu);       
+      });
+      experience.forEach((edu:any,index:number)=> {
+        this.addExperience();
+        (this.form.controls['experience'] as FormArray).at(index).patchValue(edu);       
+    });
+
+    }
+  }
 }
